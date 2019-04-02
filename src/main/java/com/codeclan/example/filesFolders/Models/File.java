@@ -1,5 +1,6 @@
 package com.codeclan.example.filesFolders.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
@@ -21,10 +22,16 @@ public class File {
     @Column
     private String size;
 
-    public File(String name, String extension, String size) {
+    @JsonIgnoreProperties("files")
+    @ManyToOne
+    @JoinColumn(name = "folder_id", nullable = false)
+    private Folder folder;
+
+    public File(String name, String extension, String size, Folder folder) {
         this.name = name;
         this.extension = extension;
         this.size = size;
+        this.folder = folder;
     }
 
     public File() {
@@ -60,5 +67,13 @@ public class File {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public Folder getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Folder folder) {
+        this.folder = folder;
     }
 }
