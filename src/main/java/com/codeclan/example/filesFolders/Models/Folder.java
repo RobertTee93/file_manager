@@ -2,6 +2,7 @@ package com.codeclan.example.filesFolders.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ public class Folder {
     private String name;
 
     @JsonIgnore
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(mappedBy = "folder", fetch = FetchType.LAZY)
     private List<File> files;
 
     @JsonIgnoreProperties("folders")
     @ManyToOne
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

@@ -9,7 +9,9 @@ import com.codeclan.example.filesFolders.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DataLoader implements ApplicationRunner {
 
     @Autowired
@@ -32,9 +34,9 @@ public class DataLoader implements ApplicationRunner {
         User claire = new User("Claire");
         userRepository.save(claire);
 
-        Folder myAnimals = new Folder("Animals", robert);
+        Folder myAnimals = new Folder("Roberts Animals", robert);
         folderRepository.save(myAnimals);
-        Folder clairesAnimals = new Folder("Animals", claire);
+        Folder clairesAnimals = new Folder("Claires Animals", claire);
         folderRepository.save(clairesAnimals);
 
         File dog = new File("Dog", "jpg", "240kb", myAnimals);

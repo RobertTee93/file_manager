@@ -2,6 +2,8 @@ package com.codeclan.example.filesFolders.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class User {
     private String name;
 
     @JsonIgnore
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Folder> folders;
 

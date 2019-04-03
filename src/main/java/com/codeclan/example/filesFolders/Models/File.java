@@ -1,6 +1,7 @@
 package com.codeclan.example.filesFolders.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class File {
 
     @JsonIgnoreProperties("files")
     @ManyToOne
+    @Cascade(value = org.hibernate.annotations.CascadeType.DELETE)
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
 
